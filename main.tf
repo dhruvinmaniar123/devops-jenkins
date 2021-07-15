@@ -1,9 +1,9 @@
 provider "aws" {
-  region = "ap-south-1"
+  region = "${var.region}"
 }
 
 resource "aws_instance" "spawing_example" {
-  ami= "var.ami_id,var.region"
+  ami= "${lookup(var.ami_id, var.region)}"
   instance_type="t2.micro"
 }
 
