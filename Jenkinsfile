@@ -34,7 +34,7 @@ pipeline {
                 message "Are you sure you want to apply this plan?"
             }
             steps{
-                sh "pwd;cd terraform ; terraform apply"
+                sh "pwd;cd terraform ; terraform apply -input=false tfplan"
             }
         }
     }
