@@ -43,4 +43,5 @@ pipeline {
             archiveArtifacts artifacts: 'tfplan.txt'
         }
 }
+}
 
