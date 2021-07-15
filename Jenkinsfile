@@ -19,19 +19,14 @@ pipeline {
                 }
             }
         }
-        stage('Init'){
+        stage('Init and plan'){
             steps{
                 sh 'curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - ; sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main" ; apt update ; apt install terraform'
                 sh 'pwd;cd terraform ; terraform init'
                 sh 'pwd;cd terraform ; terraform workspace new ${environment}'
                 sh 'pwd;cd terraform ; terraform workspace select ${environment}'
-                sh "pwd;cd terraform ; terraform plan"
+                sh "pwd;cd terraform ; terraform plan -input=false -out tfplan ; terraform show -no-color tfplan > tfplan.txt"
                 
-            }
-        }
-        stage('Plan'){
-            steps{
-                sh "pwd;cd terraform ; terraform plan"
             }
         }
         stage('Apply'){
@@ -39,9 +34,13 @@ pipeline {
                 message "Are you sure you want to apply this plan?"
             }
             steps{
-                sh "pwd;cd terraform ; terraform plan"
+                sh "pwd;cd terraform ; terraform apply"
             }
         }
     }
+    post {
+        always {
+            archiveArtifacts artifacts: 'tfplan.txt'
+        }
 }
 
