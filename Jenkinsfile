@@ -35,10 +35,10 @@ pipeline {
             }
         }
         stage('Apply'){
+            input{
+                message "Are you sure you want to apply this plan?"
+            }
             steps{
-                input{
-                    message "Are you sure you want to apply this plan?"
-                }
                 sh "pwd;cd terraform ; terraform plan"
             }
         }
