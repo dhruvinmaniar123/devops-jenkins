@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "spawing_example" {
-  ami= "${lookup(var.ami_id, var.region)}"
+  ami= "ami-0c1a7f89451184c8b"
   instance_type="t2.micro"
 }
 
