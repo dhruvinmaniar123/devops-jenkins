@@ -8,7 +8,7 @@ pipeline {
         AWS_SECRET_KEY = credentials('AWS_SECRET_KEY')
     }
 
-    agent {label 'slave-1'}
+    agent {label 'slave-01'}
 
     stages {
         stage('checkout') { 
