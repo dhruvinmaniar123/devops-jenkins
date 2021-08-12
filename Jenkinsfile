@@ -21,7 +21,7 @@ pipeline {
         }
         stage('init and plan'){
             steps{
-                sh 'apt update ; apt install terraform'
+                sh 'sudo apt update ; sudo apt install terraform'
                 sh 'pwd;cd terraform ; terraform init'
                 sh 'pwd;cd terraform ; terraform workspace new ${environment}'
                 sh 'pwd;cd terraform ; terraform workspace select ${environment}'
