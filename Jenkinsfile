@@ -21,7 +21,7 @@ pipeline {
         }
         stage('init and plan'){
             steps{
-                sh 'curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - ; sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main" ; apt update ; apt install terraform'
+                sh 'curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add - ; sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main" ; sudo apt update ; sudo apt install terraform'
                 sh 'pwd;cd terraform ; terraform init'
                 sh 'pwd;cd terraform ; terraform workspace new ${environment}'
                 sh 'pwd;cd terraform ; terraform workspace select ${environment}'
